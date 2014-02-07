@@ -31,7 +31,8 @@ typedef NS_ENUM(NSInteger, kTTCounter){
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
+	backgroundQueue = dispatch_queue_create("com.officinek.boltsframeworksample.backgroundqueue", NULL);
+    
     /*
     self.counterLabel.countDirection = kCountDirectionDown;
     [self.counterLabel setStartValue:60000];
@@ -94,7 +95,7 @@ typedef NS_ENUM(NSInteger, kTTCounter){
         
         // Create a BFExecutor that uses the main thread.
         BFExecutor *executor = [BFExecutor executorWithBlock:^void(void(^block)()) {
-            dispatch_async(dispatch_get_main_queue(), block);
+            dispatch_async(backgroundQueue, block);
         }];
         
         [[[[[[[[[self parseHTML:[NSURL URLWithString:@"http://it.wikipedia.org/wiki/IOS_(Apple)"] searchString:@"iOS"] continueWithExecutor:executor withBlock:^id(BFTask *task) {

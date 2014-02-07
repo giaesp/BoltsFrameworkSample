@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <Bolts/Bolts.h>
+#import <dispatch/dispatch.h>
 #import "TTCounterLabel.h"
 
-@interface BFSMainViewController : UIViewController <TTCounterLabelDelegate>
+@interface BFSMainViewController : UIViewController <TTCounterLabelDelegate> {
+    dispatch_queue_t backgroundQueue;
+}
 
 #pragma mark - Actions
 
